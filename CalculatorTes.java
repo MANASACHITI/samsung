@@ -1,52 +1,39 @@
-import static org.junit.Assert.*;
+package org.bnm;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CalculatorTes{
+public class CalculatorTes {
 
-    static Calculato calculator;
+    static Calculator calc;
 
-    @BeforeClass
-    public static void setUpBeforeClass() {
-        calculator = new Calculato();
-        System.out.println("Before all test cases");
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() {
-        System.out.println("After all test cases");
-    }
-
-    @Before
-    public void setUp() {
-        System.out.println("Before each test");
+    @BeforeAll
+    static void setupBeforeClass() {
+        calc = new Calculator();
     }
 
     @Test
-    public void testAddition() {
-        assertEquals(10, calculator.add(5, 5));
+    void testAdd() {
+        assertEquals(5, calc.add(2, 3));
     }
 
     @Test
-    public void testSubtraction() {
-        assertEquals(2, calculator.subtract(5, 3));
+    void testSubtract() {
+        assertEquals(1, calc.subtract(3, 2));
     }
 
     @Test
-    public void testMultiplication() {
-        assertEquals(15, calculator.multiply(5, 3));
+    void testMultiply() {
+        assertEquals(6, calc.multiply(2, 3));
     }
 
     @Test
-    public void testDivision() {
-        assertEquals(2, calculator.divide(10, 5));
+    void testDivide() {
+        assertEquals(2, calc.divide(6, 3));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testDivisionByZero() {
-        calculator.divide(10, 0);
+    @Test
+    void testDivideByZero() {
+        assertThrows(IllegalArgumentException.class, () -> calc.divide(5, 0));
     }
 }
